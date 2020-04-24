@@ -17,17 +17,6 @@ class AdvertisementsTableSeeder extends Seeder
     {
         Advertisement::truncate();
 
-        $faker = \Faker\Factory::create();
-
-        // And now, let's create a few articles in our database:
-        for ($i = 0; $i < 50; $i++) {
-            Advertisement::create([
-                'title' => $faker->sentence,
-                'description' => $faker->paragraph,
-                'quantity' => $faker->numberBetween(1, 10),
-                'price' => $faker->randomFloat(2, 10, 1000),
-                'user_id' => 1
-            ]);
-        }
+        factory(App\Advertisement::class, 50)->create();
     }
 }

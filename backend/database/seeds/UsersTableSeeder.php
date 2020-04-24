@@ -16,6 +16,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
+
         $password = Hash::make('123456');
 
         User::create([
