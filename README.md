@@ -12,7 +12,7 @@
 8. Przechodzimy do katalogu `frontend`
 9. Uruchamiamy `npm install`
 10. Uruchamamy serwer komendą `npm run serve`
-11. Pod adresami `127.0.0.1:8000` znajdziemy API, pod adresem `127.0.0.1:8080` znajdziemy warstwę front-endową
+11. Pod adresem `127.0.0.1:8000` znajdziemy API, pod adresem `127.0.0.1:8080` znajdziemy warstwę front-endową
 12. UWAGA! Należy wyłączyć AdBlocka, aby zapobiec błędom w pobieraniu danych z API
 13. W przypadku wykonywania testów należy użyć komendy `./vendor/bin/phpunit` lub `php artisan test (Laravel 7)`
 
