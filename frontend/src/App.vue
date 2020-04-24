@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div id="page-container">
     <navbar></navbar>
     <notification></notification>
     <div class="container-fluid">
       <router-view></router-view>
     </div>
+    <footer-block></footer-block>
   </div>
 </template>
 
@@ -12,12 +13,14 @@
 import Navbar from './components/Navbar'
 import Notification from './components/Notification'
 import './assets/main.css';
+import FooterBlock from './components/FooterBlock';
 
 export default {
     name: 'App',
     components: {
         'navbar': Navbar,
-        'notification': Notification
+        'notification': Notification,
+        'footer-block': FooterBlock
     }
 }
 </script>

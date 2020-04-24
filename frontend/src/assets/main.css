@@ -13,3 +13,17 @@
 .material-icons {
     cursor: pointer;
 }
+
+.footer-copyright {
+    color: white;
+    background-color: #4aba70;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 10px;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
