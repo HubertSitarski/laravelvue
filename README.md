@@ -19,7 +19,7 @@
 
 Przygotowałem prostą aplikację, która ma symulować serwis ogłoszeniowy. Projekt wydałem w formie MVP - dodałem podstawowe funkcje, które umożliwiają funkcjonowanie portalu.
 
-Do dorobienia byłyby lepsze zabezpieczenia formularzy po stronie Vue i dorobienie paru funkcjonalności (np. wymiana wiadomości między użytkownikami, role) po stronie Laravela
+Do dorobienia byłyby lepsze zabezpieczenia formularzy po stronie Vue i dorobienie paru funkcjonalności (np. wymiana wiadomości między użytkownikami, role, lepsza obsługa błędów po stronie frontu) po stronie Laravela
 
 W obecnej formie, możemy się zarejerstrować i zalogować jako administrator, przeglądać ogłoszenia, dodawać ogłoszenia, usuwać ogłoszenia i edytować ogłoszenia.
 
