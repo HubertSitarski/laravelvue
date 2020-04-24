@@ -14,6 +14,7 @@
 10. Uruchamamy serwer komendą `npm run serve`
 11. Pod adresami `127.0.0.1:8000` znajdziemy API, pod adresem `127.0.0.1:8080` znajdziemy warstwę front-endową
 12. UWAGA! Należy wyłączyć AdBlocka, aby zapobiec błędom w pobieraniu danych z API
+13. W przypadku wykonywania testów należy użyć komendy `./vendor/bin/phpunit` lub `php artisan test (Laravel 7)`
 
 ## 2. Omówienie
 
@@ -24,3 +25,24 @@ Do dorobienia byłyby lepsze zabezpieczenia formularzy po stronie Vue i dorobien
 W obecnej formie, możemy się zarejerstrować i zalogować jako administrator, przeglądać ogłoszenia, dodawać ogłoszenia, usuwać ogłoszenia i edytować ogłoszenia.
 
 Jest to tylko szkic potencjalnej, większej aplikacji, ale myślę, że dobrze oddaje mój obecny stopien zaawansowania w Laravelu i Vue
+
+## 3. TODO
+
+* Użycie Eloquent: API Resources do mapowania JSONów w przypadku wystąpienia bardziej skomplikowanych danych niż obecnie
+* Dodanie dodatkowych funkcjonalności (upload plików, wiadomości między użytkownikami, obsługa ról)
+* Lepsza obsługa błędów
+* Większe pokrycie kodu testami
+* Dodatkowe walidacje formularzy po stronie Vue.js
+
+## 4. Wybrane, użyte narzedzia
+
+* Laravel 6
+* MySQL
+* Laravel Passport
+* PHP Unit
+* Vue.js + Vue CLI
+* Vuex
+* Vue Router
+* Bootstrap 4
+* Axios
+* Localforage

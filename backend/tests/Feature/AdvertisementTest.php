@@ -3,9 +3,12 @@
 namespace Tests\Feature;
 
 use App\Advertisement;
+use App\Http\Constants\HttpMethods;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\TestResponse;
 use Laravel\Passport\Passport;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 /**
@@ -16,14 +19,18 @@ class AdvertisementTest extends TestCase
 {
     use RefreshDatabase;
 
+    private static $HEADERS = [
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+    ];
+
+    private $uriBase = '/api/advertisements/';
+
     public function testAuthorizedUser()
     {
         $this->authorize();
 
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('GET', '/api/advertisements');
+        $response = $this->buildResponse(HttpMethods::GET, $this->uriBase);
 
         $response
             ->assertStatus(200);
@@ -31,13 +38,10 @@ class AdvertisementTest extends TestCase
 
     public function testUnauthorizedUser()
     {
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('GET', '/api/advertisements');
+        $response = $this->buildResponse(HttpMethods::GET, $this->uriBase);
 
         $response
-            ->assertStatus(401);
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function testGetDetails()
@@ -45,13 +49,10 @@ class AdvertisementTest extends TestCase
         $this->authorize();
         $advertisement = factory(Advertisement::class)->create();
 
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('GET', '/api/advertisements/' . $advertisement->id);
+        $response = $this->buildResponse(HttpMethods::GET, $this->uriBase . $advertisement->id);
 
         $response
-            ->assertStatus(200)
+            ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'title' => $advertisement->title,
                 'description' => $advertisement->description,
@@ -65,21 +66,12 @@ class AdvertisementTest extends TestCase
     {
         $user = $this->authorize();
 
-        $data = [
-            'title' => 'Test',
-            'description' => 'Test Description',
-            'quantity' => 2,
-            'price' => 400.99,
-            'user_id' => $user->id
-        ];
+        $data = $this->prepareAdvertisementData($user);
 
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('POST', '/api/advertisements', $data);
+        $response = $this->buildResponse(HttpMethods::POST, $this->uriBase, $data);
 
         $response
-            ->assertStatus(201)
+            ->assertStatus(Response::HTTP_CREATED)
             ->assertJson($data);
     }
 
@@ -87,16 +79,10 @@ class AdvertisementTest extends TestCase
     {
         $this->authorize();
 
-        $data = [
-        ];
-
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('POST', '/api/advertisements', $data);
+        $response = $this->buildResponse(HttpMethods::POST, $this->uriBase);
 
         $response
-            ->assertStatus(422)
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
         ;
     }
 
@@ -106,21 +92,12 @@ class AdvertisementTest extends TestCase
 
         $advertisement = factory(Advertisement::class)->create();
 
-        $data = [
-            'title' => 'Test',
-            'description' => 'Test Description',
-            'quantity' => 2,
-            'price' => 400.99,
-            'user_id' => $user->id
-        ];
+        $data = $this->prepareAdvertisementData($user);
 
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('PUT', '/api/advertisements/' . $advertisement->id, $data);
+        $response = $this->buildResponse(HttpMethods::PUT, $this->uriBase . $advertisement->id, $data);
 
         $response
-            ->assertStatus(200)
+            ->assertStatus(Response::HTTP_OK)
             ->assertJson($data);
     }
 
@@ -130,32 +107,20 @@ class AdvertisementTest extends TestCase
 
         $advertisement = factory(Advertisement::class)->create();
 
-        $data = [
-        ];
-
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('PUT', '/api/advertisements/' . $advertisement->id, $data);
+        $response = $this->buildResponse(HttpMethods::PUT, $this->uriBase . $advertisement->id);
 
         $response
-            ->assertStatus(422);
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function testUpdateNotFound()
     {
         $this->authorize();
 
-        $data = [
-        ];
-
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('PUT', '/api/advertisements/' . 123456, $data);
+        $response = $this->buildResponse(HttpMethods::PUT, $this->uriBase . 123456);
 
         $response
-            ->assertStatus(404);
+            ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
     public function testDeleteSuccess()
@@ -164,26 +129,20 @@ class AdvertisementTest extends TestCase
 
         $advertisement = factory(Advertisement::class)->create();
 
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('DELETE', '/api/advertisements/' . $advertisement->id);
+        $response = $this->buildResponse(HttpMethods::DELETE, $this->uriBase . $advertisement->id);
 
         $response
-            ->assertStatus(204);
+            ->assertStatus(Response::HTTP_NO_CONTENT);
     }
 
     public function testDeleteNotFound()
     {
         $this->authorize();
 
-        $response = $this->withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->json('DELETE', '/api/advertisements/' . 420402);
+        $response = $this->buildResponse(HttpMethods::DELETE, $this->uriBase . 420402);
 
         $response
-            ->assertStatus(404);
+            ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -196,5 +155,31 @@ class AdvertisementTest extends TestCase
         Passport::actingAs($user);
 
         return $user;
+    }
+
+    /**
+     * @param string $method
+     * @param string $uri
+     * @param array $data
+     * @return TestResponse
+     */
+    private function buildResponse(string $method, string $uri, array $data = []): TestResponse
+    {
+        return $this->withHeaders(self::$HEADERS)->json($method, $uri, $data);
+    }
+
+    /**
+     * @param User $user
+     * @return array
+     */
+    private function prepareAdvertisementData(User $user): array
+    {
+        return [
+            'title' => 'Test',
+            'description' => 'Test Description',
+            'quantity' => 2,
+            'price' => 400.99,
+            'user_id' => $user->id
+        ];
     }
 }
