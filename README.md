@@ -6,12 +6,14 @@
 2. W katalogu `backend` uruchamiamy `composer install`
 3. Kopiujemy `env.example` do `.env` i uzupełniamy plik `.env` o dane bazy danych
 4. Używamy komendy `php artisan migrate`
-5. Uzywamy komendy `php artisan db:seed`
-6. Uruchamiamy serwer komendą `php artisan serve`
-6. Przechodzimy do katalogu `frontend`
-7. Uruchamiamy `npm install`
-8. Uruchamamy serwer komendą `npm run serve`
-9. Pod adresami `127.0.0.1:8000` znajdziemy API, pod adresem `127.0.0.1:8080` znajdziemy warstwę front-endową
+5. Uruchamiamy komendę `php artisan passport:install`
+6. Uzywamy komendy `php artisan db:seed`
+7. Uruchamiamy serwer komendą `php artisan serve`
+8. Przechodzimy do katalogu `frontend`
+9. Uruchamiamy `npm install`
+10. Uruchamamy serwer komendą `npm run serve`
+11. Pod adresami `127.0.0.1:8000` znajdziemy API, pod adresem `127.0.0.1:8080` znajdziemy warstwę front-endową
+12. UWAGA! Należy wyłączyć AdBlocka, aby zapobiec błędom w pobieraniu danych z API
 
 ## 2. Omówienie
 
