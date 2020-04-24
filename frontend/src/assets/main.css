@@ -1,0 +1,15 @@
+.bg-green {
+    background-color: #4aba70 !important;
+}
+
+.list-link {
+    color: initial !important;
+}
+
+.details-description, .details-back, .details-column {
+    margin-top: 100px;
+}
+
+.material-icons {
+    cursor: pointer;
+}
