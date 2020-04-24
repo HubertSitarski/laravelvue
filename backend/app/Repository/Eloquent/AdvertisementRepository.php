@@ -3,6 +3,7 @@
 namespace App\Repository\Eloquent;
 
 use App\Advertisement;
+use Illuminate\Support\Collection;
 
 /**
  * Class AdvertisementRepository
@@ -18,6 +19,14 @@ class AdvertisementRepository extends BaseRepository
     public function __construct(Advertisement $advertisement)
     {
         parent::__construct($advertisement);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function findAll(): Collection
+    {
+        return $this->model->with('user')->get();
     }
 
     /**
