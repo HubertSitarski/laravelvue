@@ -44,7 +44,6 @@
             }
         },
         components: {
-            FieldInput,
             'field-input': FieldInput
         },
         methods: {
@@ -54,10 +53,10 @@
                     this.register.password_confirmation == '' ||
                     this.register.name == ''
                 ) {
-                    this.register.email == '' ? this.register.email = true : null;
-                    this.register.password == '' ? this.register.password = true : null;
-                    this.register.password_confirmation == '' ? this.register.password_confirmation = true : null;
-                    this.register.name == '' ? this.register.name = true : null;
+                    this.register.email == '' ? this.errors.email = true : null;
+                    this.register.password == '' ? this.errors.password = true : null;
+                    this.register.password_confirmation == '' ? this.errors.password_confirmation = true : null;
+                    this.register.name == '' ? this.errors.name = true : null;
 
 
                     this.$store.dispatch('addNotification', {

@@ -1,7 +1,7 @@
 <template>
     <div v-if="advertisements" class="container">
         <br>
-        <button class="btn btn-success">
+        <button @click="$router.push({name: 'advertisements-create'})" class="btn btn-success">
             Dodaj
         </button>
         <br>
@@ -27,7 +27,7 @@
                         <td>{{ advertisement.price }}</td>
                         <td>{{ advertisement.user.name }}</td>
                         <td>
-                            <span class="material-icons">
+                            <span @click="$router.push({ name: 'advertisements-edit', params: { id: advertisement.id }})" class="material-icons">
                                 edit
                             </span>
                             <span @click="remove(advertisement)" class="material-icons">

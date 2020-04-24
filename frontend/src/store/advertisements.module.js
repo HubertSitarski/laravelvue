@@ -53,6 +53,62 @@ export const advertisements = {
                         console.error(e);
                     })
             })
+        },
+        createAdvertisement({ commit, dispatch }, payload) {
+            return localforage.getItem('authUser').then((headers) => {
+                return axios.post(process.env.VUE_APP_API + `api/advertisements`, payload, {headers})
+                    .then((response) => {
+                        if (response.status === 201) {
+                            dispatch('addNotification', {
+                                type: 'success',
+                                title: 'Pomyślnie dodano',
+                                content: `Pomyślnie dodano ogłoszenie`
+                            })
+                            commit('SET_ADVERTISEMENT', response.data)
+                        } else {
+                            dispatch('addNotification', {
+                                type: 'danger',
+                                title: 'Błąd dodwania',
+                                content: `Błędna odpowiedź serwera: ${response.status}`
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        dispatch('addNotification', {
+                            type: 'danger',
+                            title: 'Błąd dodawania',
+                            content: `Błędna odpowiedź serwera: ${error.response.data.message}`
+                        })
+                    })
+            })
+        },
+        updateAdvertisement({ commit, dispatch }, payload) {
+            return localforage.getItem('authUser').then((headers) => {
+                return axios.put(process.env.VUE_APP_API + `api/advertisements/${payload.id}`, payload, {headers})
+                    .then((response) => {
+                        if (response.status === 200) {
+                            dispatch('addNotification', {
+                                type: 'success',
+                                title: 'Pomyślnie zapisano',
+                                content: `Pomyślnie zapisano ogłoszenie`
+                            })
+                            commit('SET_ADVERTISEMENT', response.data)
+                        } else {
+                            dispatch('addNotification', {
+                                type: 'danger',
+                                title: 'Błąd dodwania',
+                                content: `Błędna odpowiedź serwera: ${response.status}`
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        dispatch('addNotification', {
+                            type: 'danger',
+                            title: 'Błąd dodawania',
+                            content: `Błędna odpowiedź serwera: ${error.response.data.message}`
+                        })
+                    })
+            })
         }
     },
     getters: {

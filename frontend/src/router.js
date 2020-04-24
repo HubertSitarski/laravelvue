@@ -4,6 +4,8 @@ import Login from './views/Login'
 import Register from './views/Register'
 import Advertisements from './views/Advertisements'
 import AdvertisementsDetails from './views/AdvertisementsDetails'
+import AdvertisementAdd from './views/AdvertisementAdd'
+import AdvertisementUpdate from './views/AdvertisementUpdate'
 import localforage from "localforage";
 import store from './store'
 
@@ -39,6 +41,25 @@ export const router = new Router({
             path: '/advertisements/:id',
             name: 'advertisements-details',
             component: AdvertisementsDetails,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/advertisements/create',
+            name: 'advertisements-create',
+            component: AdvertisementAdd,
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/advertisements/edit/:id',
+            name: 'advertisements-edit',
+            component: AdvertisementUpdate,
+            meta: {
+                requiresAuth: true,
+            }
         },
     ]
 })
