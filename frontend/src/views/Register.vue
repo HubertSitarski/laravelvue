@@ -97,7 +97,7 @@
                                 title: 'Pomyślnie zarejestrowano',
                                 content: `Pomyślnie zarejestrowano użytkownika`
                             })
-                            this.$router.push('login')
+                            this.$router.push({name: 'login'})
                         } else {
                             this.$store.dispatch('addNotification', {
                                 type: 'danger',
