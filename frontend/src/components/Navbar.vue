@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li v-bind:key="id" v-for="(item, id) in menu" class="nav-item">
-                    <a class="nav-link" @click="$router.push(item.name)" href="javascript:void(0)">{{ item.label }}</a>
+                    <a class="nav-link" @click="$router.push({name: item.name})" href="javascript:void(0)">{{ item.label }}</a>
                 </li>
                 <li  class="nav-item">
                     <a href="/logout" class="nav-link">

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from './views/Login'
 import Register from './views/Register'
 import Advertisements from './views/Advertisements'
+import AdvertisementsDetails from './views/AdvertisementsDetails'
 import localforage from "localforage";
 import store from './store'
 
@@ -27,19 +28,17 @@ export const router = new Router({
             component: Register
         },
         {
-            path: '/',
+            path: '/advertisements',
+            name: 'advertisements',
             component: Advertisements,
-            children: [
-                {
-                    path: 'advertisements',
-                    name: 'advertisements',
-                    component: Advertisements,
-                    meta: {
-                        requiresAuth: true,
-                    },
-                    children: []
-                },
-            ]
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/advertisements/:id',
+            name: 'advertisements-details',
+            component: AdvertisementsDetails,
         },
     ]
 })
