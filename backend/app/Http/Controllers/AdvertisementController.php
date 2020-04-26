@@ -48,9 +48,9 @@ class AdvertisementController extends Controller
      */
     public function create(AdvertisementRequest $request)
     {
-        $article = $this->advertisementRepository->create($request->all());
+        $advertisement = $this->advertisementRepository->create($request->all());
 
-        return response()->json($article, Response::HTTP_CREATED);
+        return response()->json($advertisement, Response::HTTP_CREATED);
     }
 
     /**
