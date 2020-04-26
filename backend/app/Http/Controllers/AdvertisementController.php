@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Advertisement;
-use App\Http\Requests\AdvertisementCreateRequest;
-use App\Http\Requests\AdvertisementUpdateRequest;
+use App\Http\Requests\AdvertisementRequest;
 use App\Repository\Eloquent\AdvertisementRepository;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,10 +43,10 @@ class AdvertisementController extends Controller
     }
 
     /**
-     * @param AdvertisementCreateRequest $request
+     * @param AdvertisementRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(AdvertisementCreateRequest $request)
+    public function create(AdvertisementRequest $request)
     {
         $advertisement = $this->advertisementRepository->create($request->all());
 
@@ -55,11 +54,11 @@ class AdvertisementController extends Controller
     }
 
     /**
-     * @param AdvertisementUpdateRequest $request
+     * @param AdvertisementRequest $request
      * @param Advertisement $advertisement
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(AdvertisementUpdateRequest $request, Advertisement $advertisement)
+    public function update(AdvertisementRequest $request, Advertisement $advertisement)
     {
         $this->advertisementRepository->update($request->all(), $advertisement->id);
 

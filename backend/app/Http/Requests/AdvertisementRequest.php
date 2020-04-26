@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class CreateAdvertisement
  * @package App\Http\Requests
  */
-class AdvertisementCreateRequest extends FormRequest
+class AdvertisementRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
