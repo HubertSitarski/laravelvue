@@ -26,7 +26,7 @@ interface EloquentRepositoryInterface
 
     /**
      * @param $id
-     * @return int int
+     * @return int $id
      */
     public function delete(int $id);
 
