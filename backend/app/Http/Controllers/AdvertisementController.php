@@ -6,6 +6,7 @@ use App\Advertisement;
 use App\Http\Requests\AdvertisementRequest;
 use App\Repository\Eloquent\AdvertisementRepository;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AdvertisementController
@@ -49,7 +50,7 @@ class AdvertisementController extends Controller
     {
         $article = $this->advertisementRepository->create($request->all());
 
-        return response()->json($article, 201);
+        return response()->json($article, Response::HTTP_CREATED);
     }
 
     /**
@@ -61,7 +62,7 @@ class AdvertisementController extends Controller
     {
         $this->advertisementRepository->update($request->all(), $advertisement->id);
 
-        return response()->json($this->advertisementRepository->find($advertisement->id), 200);
+        return response()->json($this->advertisementRepository->find($advertisement->id), Response::HTTP_OK);
     }
 
     /**
@@ -73,7 +74,7 @@ class AdvertisementController extends Controller
     {
         $this->advertisementRepository->delete($advertisement->id);
 
-        return response()->json(null, 204);
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -84,6 +85,6 @@ class AdvertisementController extends Controller
     {
         $this->advertisementRepository->restore($advertisement->id);
 
-        return response()->json($this->advertisementRepository->find($advertisement->id), 200);
+        return response()->json($this->advertisementRepository->find($advertisement->id), Response::HTTP_OK);
     }
 }

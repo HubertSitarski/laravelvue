@@ -7,6 +7,7 @@ use App\Repository\Eloquent\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AuthController
@@ -30,7 +31,7 @@ class AuthController extends Controller
         $this->userRepository->register($request);
         return response()->json([
             'message' => 'Successfully created user!'
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -44,7 +45,7 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'Unauthorized'
-            ], 401);
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
         $user = $request->user();
